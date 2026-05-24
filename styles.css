@@ -1,0 +1,230 @@
+:root {
+  --bg: #0f1220;
+  --surface: #1a1f35;
+  --surface-2: #232a47;
+  --text: #eef1ff;
+  --muted: #9aa3c7;
+  --accent: #6c7bff;
+  --accent-2: #34d399;
+  --radius: 16px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Le bon mode est révélé par app.js via [data-active] sur <body> */
+.view { display: none; }
+body[data-active="home"] #home,
+body[data-active="display"] #display,
+body[data-active="remote"] #remote { display: flex; }
+
+/* ---------- Accueil ---------- */
+#home {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 32px 20px;
+  gap: 18px;
+  text-align: center;
+}
+#home h1 { font-size: 2rem; margin: 0; }
+.subtitle { color: var(--muted); margin: 0; max-width: 32ch; }
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.big-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 18px 24px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: transform .08s ease, filter .15s ease;
+}
+.big-btn:hover { filter: brightness(1.08); }
+.big-btn:active { transform: scale(.97); }
+
+.editor {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  width: min(560px, 100%);
+  text-align: left;
+  margin-top: 12px;
+}
+.editor h2 { margin: 0 0 6px; font-size: 1.1rem; }
+.hint { color: var(--muted); font-size: .85rem; margin: 0 0 10px; }
+.hint code { background: var(--surface-2); padding: 2px 6px; border-radius: 6px; }
+#deck-input {
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--surface-2);
+  border-radius: 10px;
+  padding: 12px;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: .9rem;
+  resize: vertical;
+}
+.editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.editor-actions button {
+  background: var(--accent-2);
+  color: #06281d;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.editor-actions .ghost {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--surface-2);
+}
+.status { color: var(--muted); font-size: .85rem; }
+
+/* ---------- Affichage ---------- */
+#display {
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 4vmin;
+}
+.card {
+  background: var(--surface);
+  border-radius: 24px;
+  width: min(900px, 100%);
+  min-height: min(560px, 80vh);
+  padding: 6vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+}
+.card-meta {
+  position: absolute;
+  top: 18px; right: 22px;
+  color: var(--muted);
+  font-size: .95rem;
+}
+.card-face { font-size: clamp(1.6rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.25; }
+.card-answer {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 2px solid var(--surface-2);
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  color: var(--accent-2);
+  line-height: 1.35;
+}
+.card-hint {
+  position: absolute;
+  bottom: 18px; left: 0; right: 0;
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+/* ---------- Télécommande ---------- */
+#remote {
+  flex-direction: column;
+  min-height: 100%;
+  padding: 18px;
+  gap: 16px;
+  max-width: 540px;
+  margin: 0 auto;
+  width: 100%;
+}
+.remote-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--muted);
+}
+.badge {
+  background: var(--accent);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: .8rem;
+  font-weight: 600;
+}
+.preview {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 18px;
+  min-height: 120px;
+}
+.preview-label {
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: .7rem;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.preview-text { font-size: 1.15rem; line-height: 1.4; }
+.preview-text.answer { color: var(--accent-2); margin-bottom: 4px; }
+.preview-label:not(:first-child) { margin-top: 14px; }
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 10px;
+}
+.ctrl {
+  background: var(--surface-2);
+  color: var(--text);
+  border: none;
+  border-radius: 14px;
+  padding: 22px 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .08s ease, filter .15s ease;
+}
+.ctrl:hover { filter: brightness(1.12); }
+.ctrl:active { transform: scale(.96); }
+.ctrl.flip { background: var(--accent); color: #fff; }
+
+.jump-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+.jump-list li {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+.jump-list li.current { outline: 2px solid var(--accent); }
+.jump-list .num { color: var(--muted); font-variant-numeric: tabular-nums; min-width: 1.6em; }
+.jump-list .q { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }

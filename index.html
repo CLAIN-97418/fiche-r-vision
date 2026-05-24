@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Fiches de révision — Télécommande</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Accueil : choix du mode -->
+  <main id="home" class="view">
+    <h1>Fiches de révision</h1>
+    <p class="subtitle">Affiche tes fiches sur un écran et pilote-les depuis une autre fenêtre.</p>
+
+    <div class="home-actions">
+      <button class="big-btn" data-open="display">📽️ Ouvrir l'affichage</button>
+      <button class="big-btn" data-open="remote">🎛️ Ouvrir la télécommande</button>
+    </div>
+
+    <section class="editor">
+      <h2>Mes fiches</h2>
+      <p class="hint">Une fiche par ligne, au format&nbsp;: <code>Question | Réponse</code></p>
+      <textarea id="deck-input" rows="8" spellcheck="false"></textarea>
+      <div class="editor-actions">
+        <button id="save-deck">Enregistrer les fiches</button>
+        <button id="reset-deck" class="ghost">Réinitialiser l'exemple</button>
+        <span id="editor-status" class="status"></span>
+      </div>
+    </section>
+  </main>
+
+  <!-- Affichage plein écran -->
+  <main id="display" class="view">
+    <div class="card" id="card">
+      <div class="card-meta"><span id="d-position"></span></div>
+      <div class="card-face" id="d-question"></div>
+      <div class="card-answer" id="d-answer" hidden></div>
+      <div class="card-hint" id="d-hint">Espace : révéler · → suivante · ← précédente</div>
+    </div>
+  </main>
+
+  <!-- Télécommande -->
+  <main id="remote" class="view">
+    <header class="remote-head">
+      <span class="badge">Télécommande</span>
+      <span id="r-position"></span>
+    </header>
+
+    <div class="preview">
+      <div class="preview-label">Question</div>
+      <div id="r-question" class="preview-text"></div>
+      <div class="preview-label" id="r-answer-label" hidden>Réponse</div>
+      <div id="r-answer" class="preview-text answer" hidden></div>
+    </div>
+
+    <div class="controls">
+      <button id="r-prev" class="ctrl">⟵ Préc.</button>
+      <button id="r-flip" class="ctrl flip">Révéler</button>
+      <button id="r-next" class="ctrl">Suiv. ⟶</button>
+    </div>
+
+    <ul id="r-list" class="jump-list"></ul>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
