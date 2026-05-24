@@ -2,44 +2,56 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Fiches de révision — Télécommande</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fiches de révision</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Accueil : choix du mode -->
+  <!-- Vue principale : réviseur autonome (fonctionne seul, au double-clic) -->
   <main id="home" class="view">
-    <h1>Fiches de révision</h1>
-    <p class="subtitle">Affiche tes fiches sur un écran et pilote-les depuis une autre fenêtre.</p>
+    <header class="topbar">
+      <h1>Fiches de révision</h1>
+      <button id="open-remote" class="link-btn" title="Piloter depuis une 2e fenêtre">
+        🎛️ Mode télécommande
+      </button>
+    </header>
 
-    <div class="home-actions">
-      <button class="big-btn" data-open="display">📽️ Ouvrir l'affichage</button>
-      <button class="big-btn" data-open="remote">🎛️ Ouvrir la télécommande</button>
+    <section class="card" id="home-card">
+      <div class="card-meta"><span id="h-position"></span></div>
+      <div class="card-face" id="h-question"></div>
+      <div class="card-answer" id="h-answer" hidden></div>
+    </section>
+
+    <div class="controls">
+      <button id="h-prev" class="ctrl">⟵ Préc.</button>
+      <button id="h-flip" class="ctrl flip">Révéler</button>
+      <button id="h-next" class="ctrl">Suiv. ⟶</button>
     </div>
+    <p class="kbd-hint">Clavier : <kbd>←</kbd> <kbd>→</kbd> pour naviguer, <kbd>Espace</kbd> pour révéler</p>
 
-    <section class="editor">
-      <h2>Mes fiches</h2>
+    <details class="editor">
+      <summary>✏️ Mes fiches</summary>
       <p class="hint">Une fiche par ligne, au format&nbsp;: <code>Question | Réponse</code></p>
       <textarea id="deck-input" rows="8" spellcheck="false"></textarea>
       <div class="editor-actions">
-        <button id="save-deck">Enregistrer les fiches</button>
+        <button id="save-deck">Enregistrer</button>
         <button id="reset-deck" class="ghost">Réinitialiser l'exemple</button>
         <span id="editor-status" class="status"></span>
       </div>
-    </section>
+    </details>
   </main>
 
-  <!-- Affichage plein écran -->
+  <!-- Affichage plein écran (mode 2 fenêtres) -->
   <main id="display" class="view">
-    <div class="card" id="card">
+    <div class="card">
       <div class="card-meta"><span id="d-position"></span></div>
       <div class="card-face" id="d-question"></div>
       <div class="card-answer" id="d-answer" hidden></div>
-      <div class="card-hint" id="d-hint">Espace : révéler · → suivante · ← précédente</div>
+      <div class="card-hint">Espace : révéler · → suivante · ← précédente</div>
     </div>
   </main>
 
-  <!-- Télécommande -->
+  <!-- Télécommande (mode 2 fenêtres) -->
   <main id="remote" class="view">
     <header class="remote-head">
       <span class="badge">Télécommande</span>

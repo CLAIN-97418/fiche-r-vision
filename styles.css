@@ -25,48 +25,53 @@ body[data-active="home"] #home,
 body[data-active="display"] #display,
 body[data-active="remote"] #remote { display: flex; }
 
-/* ---------- Accueil ---------- */
+/* ---------- Accueil : réviseur autonome ---------- */
 #home {
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   min-height: 100%;
-  padding: 32px 20px;
-  gap: 18px;
-  text-align: center;
+  padding: 18px;
+  gap: 16px;
+  max-width: 760px;
+  margin: 0 auto;
+  width: 100%;
 }
-#home h1 { font-size: 2rem; margin: 0; }
-.subtitle { color: var(--muted); margin: 0; max-width: 32ch; }
-
-.home-actions {
+.topbar {
   display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  justify-content: center;
-  margin-top: 8px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
-.big-btn {
-  background: var(--accent);
-  color: #fff;
+.topbar h1 { font-size: 1.4rem; margin: 0; }
+.link-btn {
+  background: var(--surface-2);
+  color: var(--text);
   border: none;
-  border-radius: var(--radius);
-  padding: 18px 24px;
-  font-size: 1.05rem;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: .85rem;
   cursor: pointer;
-  transition: transform .08s ease, filter .15s ease;
 }
-.big-btn:hover { filter: brightness(1.08); }
-.big-btn:active { transform: scale(.97); }
+.link-btn:hover { filter: brightness(1.15); }
+
+#home .card { min-height: min(420px, 60vh); }
+
+.kbd-hint { color: var(--muted); font-size: .85rem; text-align: center; margin: 0; }
+kbd {
+  background: var(--surface-2);
+  border-radius: 6px;
+  padding: 2px 7px;
+  font-family: inherit;
+  font-size: .8em;
+}
 
 .editor {
   background: var(--surface);
   border-radius: var(--radius);
-  padding: 20px;
-  width: min(560px, 100%);
-  text-align: left;
-  margin-top: 12px;
+  padding: 16px 20px;
+  width: 100%;
 }
-.editor h2 { margin: 0 0 6px; font-size: 1.1rem; }
+.editor summary { cursor: pointer; font-weight: 600; }
+.editor > *:not(summary) { margin-top: 12px; }
 .hint { color: var(--muted); font-size: .85rem; margin: 0 0 10px; }
 .hint code { background: var(--surface-2); padding: 2px 6px; border-radius: 6px; }
 #deck-input {
